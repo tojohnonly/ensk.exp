@@ -25,7 +25,7 @@ public class YamlParser {
         List<String> aiNodes = new ArrayList<>();
         // Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
         Pattern autoSelectPattern = Pattern.compile("(?=.*(香港|HK|日本|JP|新加坡|SG|台湾|TW))^((?!(ENSKAI|AI|ai)).)*$");
-        //Pattern autoSelectPattern = Pattern.compile(".*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW).*");
+        // Pattern autoSelectPattern = Pattern.compile(".*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW).*");
         // Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
         Pattern aiNodesPattern = Pattern.compile(".*(?:ENSKAI|AI|ai).*");
         for (Map<String, Object> proxie : proxies) {
