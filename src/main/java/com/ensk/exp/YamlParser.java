@@ -13,7 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 public class YamlParser {
     public static void main(String[] args) throws FileNotFoundException {
         // Load YAML file
-        InputStream input = new FileInputStream("D:\\OneDrive\\Teck\\VPN\\Clash\\Mojie.yml");
+        InputStream input = new FileInputStream("D:\\OneDrive\\Teck\\VPN\\Clash\\YeShaYun.yml");
         // Create YAML parser
         Yaml yaml = new Yaml();
         Map<String, Object> yamlData = yaml.load(input);
@@ -23,11 +23,22 @@ public class YamlParser {
         List<String> enskNodes = new ArrayList<>();
         List<String> autoSelect = new ArrayList<>();
         List<String> aiNodes = new ArrayList<>();
-        // Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
-        Pattern autoSelectPattern = Pattern.compile("(?=.*(香港|HK|日本|JP|新加坡|SG|台湾|TW))^((?!(ENSKAI|AI|ai)).)*$");
+
+        /** Normal */
         // Pattern autoSelectPattern = Pattern.compile(".*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW).*");
-        // Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
-        Pattern aiNodesPattern = Pattern.compile(".*(?:ENSKAI|AI|ai).*");
+
+        /** Mojie */
+        // Pattern autoSelectPattern = Pattern.compile("(?=.*(香港|HK|日本|JP|新加坡|SG|台湾|TW))^((?!(ENSKAI|AI|ai)).)*$");
+        // Pattern aiNodesPattern = Pattern.compile(".*(?:ENSKAI|AI|ai).*");
+
+        /** YeShaYun */
+        Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
+        Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:美国|US|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
+
+        /** TAG */
+        // Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
+        // Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:美国|US|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
+
         for (Map<String, Object> proxie : proxies) {
             String nodeName = (String)proxie.get("name");
             if (null == nodeName) {
