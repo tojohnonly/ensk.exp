@@ -13,7 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 public class YamlParser {
     public static void main(String[] args) throws FileNotFoundException {
         // Load YAML file
-        InputStream input = new FileInputStream("D:\\OneDrive\\Teck\\VPN\\Clash\\YeShaYun.yml");
+        InputStream input = new FileInputStream("D:\\OneDrive\\Teck\\VPN\\Clash\\Yeshayun.yml");
         // Create YAML parser
         Yaml yaml = new Yaml();
         Map<String, Object> yamlData = yaml.load(input);
@@ -26,21 +26,26 @@ public class YamlParser {
 
         /** Normal */
         // Pattern autoSelectPattern = Pattern.compile(".*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW).*");
+        // Pattern aiNodesPattern = Pattern.compile(".*(?:日本|JP|新加坡|SG|台湾|TW).*");
 
         /** Mojie */
         // Pattern autoSelectPattern = Pattern.compile("(?=.*(香港|HK|日本|JP|新加坡|SG|台湾|TW))^((?!(ENSKAI|AI|ai)).)*$");
         // Pattern aiNodesPattern = Pattern.compile(".*(?:ENSKAI|AI|ai).*");
 
-        /** YeShaYun */
-        Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
-        Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:美国|US|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
-
         /** TAG */
-        // Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
-        // Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:美国|US|日本|JP|新加坡|SG|台湾|TW))(?=.*(?:1x|1X)).*$");
+        Pattern autoSelectPattern = Pattern.compile("^(?=.*(?:香港|HK|Hong Kong|日本|JP|Japan|新加坡|SG|Singapore|台湾|TW|Taiwan|美国|US|United States|英国|UK|United Kingdom))(?=.*(?:1x|1X)).*$");
+        Pattern aiNodesPattern = Pattern.compile("^(?=.*(?:日本|JP|Japan|新加坡|SG|Singapore|台湾|TW|Taiwan|美国|US|United States|英国|UK|United Kingdom))(?=.*(?:1x|1X)).*$");
+
+        /** YeShaYun */
+        // Pattern autoSelectPattern = Pattern.compile(".*(?:香港|HK|Hong Kong|日本|JP|Japan|新加坡|SG|Singapore|台湾|TW|Taiwan|美国|US|United States|英国|UK|United Kingdom).*");
+        // Pattern aiNodesPattern = Pattern.compile(".*(?:日本|JP|Japan|新加坡|SG|Singapore|台湾|TW|Taiwan|美国|US|United States|英国|UK|United Kingdom).*");
+
+        /** Leiting */
+        // Pattern autoSelectPattern = Pattern.compile("^(?:(?!ENSKAI|AI).)*$");
+        // Pattern aiNodesPattern = Pattern.compile(".*(?:ENSKAI|AI|ai).*");
 
         for (Map<String, Object> proxie : proxies) {
-            String nodeName = (String)proxie.get("name");
+            String nodeName = "'" + proxie.get("name") + "'";
             if (null == nodeName) {
                 continue;
             }
@@ -52,6 +57,7 @@ public class YamlParser {
                 aiNodes.add(nodeName);
             }
         }
+        
         /** Print proxies groups */
         System.out.println("EnskNodes:");
         System.out.println("    proxies: " + enskNodes);
