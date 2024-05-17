@@ -1,4 +1,4 @@
-package com.ensk.exp;
+package com.ensk.exp.snowflake;
 
 /**
  * Twitter_Snowflake SnowFlake的结构如下 (每部分用 - 分开) : 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 -

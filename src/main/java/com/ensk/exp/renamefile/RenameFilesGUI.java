@@ -1,4 +1,4 @@
-package com.ensk.exp;
+package com.ensk.exp.renamefile;
 
 import javax.swing.*;
 import java.awt.*;
