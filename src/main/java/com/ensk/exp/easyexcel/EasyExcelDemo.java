@@ -16,25 +16,24 @@ public class EasyExcelDemo {
  
         InputStream inputStream = new FileInputStream("C:\\Users\\Administrator\\Desktop\\123.xlsx");
         List<ExcelData> dataList = EasyExcel.read(inputStream).head(ExcelData.class).sheet().headRowNumber(1).doReadSync();
-        Map<String, List<ExcelData>> dataMap = dataList.stream().collect(Collectors.groupingBy(ExcelData::getString4));
+        Map<String, List<ExcelData>> dataMap = dataList.stream().collect(Collectors.groupingBy(ExcelData::getString1));
 
         String filePath = "C:\\Users\\Administrator\\Desktop\\数据库脚本.sql";
-
         BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-
         for (Map.Entry<String, List<ExcelData>> entry : dataMap.entrySet()) {
 
+            // 组装商品描述HTML
             StringBuilder desc = new StringBuilder();
             String head = "<html> <head></head> <body>  &nbsp; ";
             desc.append(head);
             entry.getValue().forEach(e -> {
                 String imagePattern = "  <img alt=\\\"\\\" src=\\\"https://img1.tianhong.cn/upload/image/pd/text/2024/5/16/%s\\\">";
-                desc.append(String.format(imagePattern, e.getString6()));
+                desc.append(String.format(imagePattern, e.getString3()));
             });
             String tail = " </body></html>";
             desc.append(tail);
 
-
+            // 组装SQL并写入文件
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE `product_text`  SET `web_description` = \"");
             sql.append(desc);
